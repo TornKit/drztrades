@@ -1,0 +1,169 @@
+// ==UserScript==
+// @name         Dr. Z's Super Trade Button
+// @namespace    http://tampermonkey.net/
+// @version      3.8
+// @description  Opens the best trading interface ever
+// @match        https://www.torn.com/item.php
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Create a button element for "Trade w/ Dr. Z"
+    const helloButton = document.createElement('button');
+    helloButton.textContent = 'Trade w/ Dr. Z';
+
+    // Apply button styles for "Trade w/ Dr. Z"
+    helloButton.style.backgroundImage = 'linear-gradient(to bottom, #E02020, #AA1010)';
+    helloButton.style.border = '1px solid #AA1010';
+    helloButton.style.color = 'white';
+    helloButton.style.fontWeight = 'bold';
+    helloButton.style.padding = '10px 20px';
+    helloButton.style.borderRadius = '4px';
+    helloButton.style.boxShadow = '2px 2px 4px rgba(0, 0, 0, 0.4)';
+    helloButton.style.cursor = 'pointer';
+
+    // Add a click event listener to the "Trade w/ Dr. Z" button
+    helloButton.addEventListener('click', function() {
+        // Open a new popup window with a table
+        const popupWindow = window.open('', 'TradePopup', 'width=800,height=400'); // Adjusted width
+
+        // Gather item data from the hosting web page
+        const itemElements = document.querySelectorAll('#all-items .name');
+
+        // Create a table for the popup
+        const table = document.createElement('table');
+        table.style.borderCollapse = 'collapse';
+        table.style.width = '100%';
+        table.style.border = '1px solid #ccc';
+        table.style.tableLayout = 'fixed'; // Ensures all content is visible
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th style="width: 20%; border: 1px solid #ccc;">Quantity</th>
+                    <th style="width: 30%;">Item</th>
+                    <th style="width: 20%; border: 1px solid #ccc;">Market Value Per</th>
+                    <th style="width: 30%;">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        `;
+
+        // Add rows to the table based on the extracted data
+        const tbody = table.querySelector('tbody');
+        itemElements.forEach((itemElement) => {
+            const itemParentLi = itemElement.closest('li');
+
+            // Skip items with data-equipped="true" or certain data-category values
+            if (
+                itemParentLi &&
+                (itemParentLi.getAttribute('data-equipped') === 'true' ||
+                    ['Primary', 'Secondary', 'Melee', 'Defensive'].includes(itemParentLi.getAttribute('data-category')))
+            ) {
+                return;
+            }
+
+            const itemImageSrc = itemParentLi.querySelector('img.torn-item').getAttribute('src');
+            const itemName = itemElement.textContent.trim();
+            const itemValue = '0';
+
+            // Extract the market value per item based on your requirements
+            let marketValuePer = 'N/A'; // Default value
+            const span = itemParentLi.querySelector('.tt-item-price');
+            if (span) {
+                const valueText = span.textContent;
+                if (valueText.includes('|')) {
+                    const parts = valueText.split('|');
+                    marketValuePer = parts[0].trim();
+                } else {
+                    marketValuePer = valueText.trim();
+                }
+            }
+
+            // Remove rows with "market value per" equal to "N/A" or zero
+            if (marketValuePer === 'N/A' || marketValuePer === '0') {
+                return;
+            }
+
+            const itemRow = document.createElement('tr');
+            itemRow.innerHTML = `
+                <td style="border: 1px solid #ccc;">
+                    <button class="quantity-minus" style="background: linear-gradient(to bottom, #FF0000, #CC0000); color: white; border: none;">-</button>
+                    <span class="quantity" style="border: 1px solid #ccc; display: inline-block; padding: 3px;">0</span>
+                    <button class="quantity-plus" style="background: linear-gradient(to bottom, #00FF00, #00CC00); color: white; border: none;">+</button>
+                </td>
+                <td style="border: 1px solid #ccc;">
+                    <img src="${itemImageSrc}" alt="${itemName}" style="vertical-align: middle; margin-right: 5px;" /> ${itemName}
+                </td>
+                <td style="border: 1px solid #ccc;" class="market-value">${marketValuePer}</td>
+                <td style="border: 1px solid #ccc;" class="item-value">${itemValue}</td>
+            `;
+
+            // Add event listeners for quantity buttons
+            const quantityPlusButton = itemRow.querySelector('.quantity-plus');
+            const quantityMinusButton = itemRow.querySelector('.quantity-minus');
+            const quantitySpan = itemRow.querySelector('.quantity');
+            const marketValueCell = itemRow.querySelector('.market-value');
+            const itemValueCell = itemRow.querySelector('.item-value');
+
+            quantityPlusButton.addEventListener('click', function() {
+                let quantity = parseInt(quantitySpan.textContent);
+                quantity++;
+                quantitySpan.textContent = quantity;
+
+                // Update the value column based on the new quantity
+                updateValue(itemValueCell, marketValueCell, quantity);
+            });
+
+            quantityMinusButton.addEventListener('click', function() {
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantity > 0) {
+                    quantity--;
+                    quantitySpan.textContent = quantity;
+
+                    // Update the value column based on the new quantity
+                    updateValue(itemValueCell, marketValueCell, quantity);
+                }
+            });
+
+            tbody.appendChild(itemRow);
+        });
+
+        // Append the table to the popup window's document
+        popupWindow.document.title = 'Trade with Dr. Z';
+        popupWindow.document.body.appendChild(table);
+
+        // Create a button element for "Set Trade" after the table
+        const setTradeButton = document.createElement('button');
+        setTradeButton.textContent = 'Set Trade';
+        setTradeButton.style.backgroundColor = '#00CC00'; // Green color
+        setTradeButton.style.color = 'white';
+        setTradeButton.style.fontWeight = 'bold';
+        setTradeButton.style.padding = '10px 20px';
+        setTradeButton.style.borderRadius = '4px';
+        setTradeButton.style.border = 'none';
+        setTradeButton.style.cursor = 'pointer';
+        setTradeButton.style.marginTop = '20px'; // Adjusted margin top
+        setTradeButton.style.float = 'right'; // Align to the right
+
+        // Append the "Set Trade" button to the popup window's document
+        popupWindow.document.body.appendChild(setTradeButton);
+    });
+
+    // Find the target div element with the specified classes
+    const targetDiv = document.querySelector('.title-black.hospital-dark.top-round.scroll-dark');
+
+    // Insert the "Trade w/ Dr. Z" button just before the target div
+    if (targetDiv) {
+        targetDiv.parentNode.insertBefore(helloButton, targetDiv);
+    }
+
+    // Function to update the item value based on quantity and market value
+    function updateValue(itemValueCell, marketValueCell, quantity) {
+        const marketValue = parseFloat(marketValueCell.textContent.replace('$', '').replace(/,/g, ''));
+        const newValue = (quantity * marketValue).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        itemValueCell.textContent = newValue;
+    }
+})();
