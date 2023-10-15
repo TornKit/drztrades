@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         Dr. Z's Super Trade Button
 // @namespace    http://tampermonkey.net/
-// @version      3.8
+// @version      0.92
 // @description  Opens the best trading interface ever
+// @downloadURL  
 // @match        https://www.torn.com/item.php
 // @grant        none
 // ==/UserScript==
