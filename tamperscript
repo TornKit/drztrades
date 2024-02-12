@@ -157,7 +157,7 @@
                 const datasort = itemElement.getAttribute('data-sort');
                 const quantity = itemElement.getAttribute('data-qty');
 
-                if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive'].includes(category) || parseInt(quantity) === 0 || isNaN(parseInt(quantity)) || datasort.match(/^Halloween Basket.*$/)) {
+                if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive','Enhancer','Special'].includes(category) || parseInt(quantity) === 0 || isNaN(parseInt(quantity)) || datasort.match(/^Halloween Basket.*$/)) {
                     return; // Skip items with undesired categories
                 }
 
