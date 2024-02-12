@@ -1,16 +1,22 @@
-This script requires Tampermonkey or 
-another user script manager. This 
-script adds a button to your Items
-page which, when clicked, gathers the
-items listed (obeying any filters on
-the list) and displays in a new window
-a table with the gathered items listed.
-The list contains adjustable quantity
-buttons, the market price for each
-item, and calculations to total each
-item together and multiply the result
-by 98%, displaying to the user the
-total Zoraida will offer for the items
+This script requires Tampermonkey
+or another user script manager and
+depends on Torn Tools using the
+"show market value" option for your
+Items page.
+
+This  script adds a button to your
+Items page which, when clicked,
+gathers the items listed (obeying
+any filters on the list) and 
+displays in a new window a table
+with the gathered items listed.
+The list contains adjustable
+quantity buttons, the market price
+for each item, and calculations to
+total each item together and
+multiply the result by 98%,
+displaying to the user the total 
+Zoraida will offer for the items
 listed in their quantities shown.
 
 Users are encouraged to compare
@@ -41,3 +47,13 @@ items? Ensure the following:
   - Others to be added
  
 Direct queries to Zoraida (2871443).
+
+Planned enhancements
+- Quantity boxes accept user input
+- Parameterized buying
+  configuration (basically
+  opening it up to other traders
+  more than it already is by making
+  some behaviors easily adjustable)
+- Removal of TT dependency
+- Torn PDA compatibility
