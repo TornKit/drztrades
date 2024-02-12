@@ -13,12 +13,13 @@ by 98%, displaying to the user the
 total Zoraida will offer for the items
 listed in their quantities shown.
 
-Users are encouraged compare results
-of my offer method with other,
-flashier lists that calculate "market
-value" every 15 minutes under the
-guise of being better for the supplier.
-My method won't always provide the best
+Users are encouraged to compare
+results of my offer method with
+other, flashier lists that
+calculate "market value" every 15
+minutes under the guise of being
+better for the supplier. My method
+won't always provide the best
 price, but you'll always be able to
 see my offer before even setting the
 trade and you'll *never* calculate an
