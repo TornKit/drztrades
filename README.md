@@ -1,4 +1,6 @@
-This script adds a button to your Items
+This script requires Tampermonkey or 
+another user script manager. This 
+script adds a button to your Items
 page which, when clicked, gathers the
 items listed (obeying any filters on
 the list) and displays in a new window
