@@ -157,7 +157,12 @@
                 const datasort = itemElement.getAttribute('data-sort');
                 const quantity = itemElement.getAttribute('data-qty');
 
-                if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive','Enhancer','Special','Other','Clothing','Electronic'].includes(category) || parseInt(quantity) === 0 || isNaN(parseInt(quantity)) || datasort.match(/^Halloween Basket.*$/)) {
+                if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive','Enhancer','Special','Other','Clothing','Electronic'].includes(category) ||
+                    parseInt(quantity) === 0 ||
+                    isNaN(parseInt(quantity)) ||
+                    datasort.match(/^Halloween Basket.*$/) ||
+                    datasort.match(/^Love Juice/))
+                {
                     return; // Skip items with undesired categories
                 }
 
@@ -178,7 +183,7 @@
                 itemRow.innerHTML = `
                 <td style="border: 1px solid #000; text-align: center;">
                     <button class="quantity-minus" style="background: linear-gradient(to bottom, #FF0000, #CC0000); color: white; border: none;">-</button>
-                    <input class="quantity-input" placeholder="000" type="number" min="0" max="${quantity}" value="${quantity}" style="border: 1px solid #000; text-align: center; width: 50px; display: inline-block; padding: 3px;" readonly>
+                    <input class="quantity-input" placeholder="0" type="number" min="0" max="${quantity}" value="${quantity}" style="border: 1px solid #000; text-align: center; width: 50px; display: inline-block; padding: 3px;">
                     <button class="quantity-plus" style="background: linear-gradient(to bottom, #00FF00, #00CC00); color: white; border: none;">+</button>
                 </td>
                 <td style="border: 1px solid #000; white-space: nowrap; max-width: 100%; text-align: left;">
@@ -192,6 +197,34 @@
                 const quantityMinusButton = itemRow.querySelector('.quantity-minus');
                 const quantityPlusButton = itemRow.querySelector('.quantity-plus');
                 const itemValueCell = itemRow.querySelector('.item-value');
+
+                quantityInput.addEventListener('focusout', () => {
+                    let newQuantity = parseInt(quantityInput.value);
+                    if (isNaN(newQuantity)) {quantityInput.value = 0;}
+                    else if (newQuantity >= quantity) {
+                        quantityInput.value = quantity;
+                    }
+                    else if (newQuantity <= 0) {
+                        quantityInput.value = 0;
+                    }
+                    else quantityInput.value = newQuantity;
+                    itemValueCell.textContent = quantityInput.value * valueEach;
+                    updateValues(itemRow, summaryRow, drzPaysRow);
+                });
+
+                quantityInput.addEventListener('click', () => {
+                    let newQuantity = parseInt(quantityInput.value);
+                    if (isNaN(newQuantity)) {quantityInput.value = 0;}
+                    else if (newQuantity >= quantity) {
+                        quantityInput.value = quantity;
+                    }
+                    else if (newQuantity <= 0) {
+                        quantityInput.value = 0;
+                    }
+                    else quantityInput.value = newQuantity;
+                    itemValueCell.textContent = quantityInput.value * valueEach;
+                    updateValues(itemRow, summaryRow, drzPaysRow);
+                });
 
                 quantityMinusButton.addEventListener('click', () => {
                     let newQuantity = parseInt(quantityInput.value) - 1;
