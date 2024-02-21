@@ -49,7 +49,6 @@ items? Ensure the following:
 Direct queries to Zoraida (2871443).
 
 Planned enhancements
-- Quantity boxes accept user input
 - Parameterized buying
   configuration (basically
   opening it up to other traders
@@ -57,3 +56,6 @@ Planned enhancements
   some behaviors easily adjustable)
 - Removal of TT dependency
 - Torn PDA compatibility
+
+Implemented enchancements
+- Quantity boxes accept user input
