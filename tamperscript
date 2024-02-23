@@ -1,16 +1,38 @@
 // ==UserScript==
 // @name         Dr. Z's Super Trade Button
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Opens the best trading interface ever
 // @match        https://www.torn.com/item.php
 // @grant        none
 // ==/UserScript==
 
+// SET YOUR API KEY HERE //
+const apiKey = ('xxx');
+
 (function() {
     'use strict';
 
     let popupWindow;
+    let itemValuePairs = {};
+    const apiUrl = `https://api.torn.com/torn/?selections=items&key=${apiKey}`;
+
+    // Fetch data from the Torn API
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+        if (data.items) {
+            // Extract key-value pairs from the API response
+            itemValuePairs = Object.entries(data.items)
+                .reduce((accumulator, [itemId, itemData]) => {
+                accumulator[itemId] = itemData.market_value;
+                return accumulator;
+            }, {});
+        } else {
+            console.error('Error: Unable to retrieve items data from the API response.');
+        }
+    })
+        .catch(error => console.error('Error fetching data from the Torn API:', error));
 
     // Function to extract the numeric value from a string
     function extractNumericValue(str) {
@@ -57,6 +79,10 @@
     tradeButton.style.borderRadius = '4px';
     tradeButton.style.boxShadow = '2px 2px 4px rgba(0, 0, 0, 0.4)';
     tradeButton.style.cursor = 'pointer';
+
+    function getMarketValue(itemId) {
+        return itemValuePairs[itemId] || 0;
+    }
 
     // Add a click event listener to the "Trade w/ Dr. Z" button
     tradeButton.addEventListener('click', function() {
@@ -156,6 +182,7 @@
                 const category = itemElement.getAttribute('data-category');
                 const datasort = itemElement.getAttribute('data-sort');
                 const quantity = itemElement.getAttribute('data-qty');
+                const itemID = itemElement.getAttribute('data-item');
 
                 if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive','Enhancer','Special','Other','Clothing','Electronic'].includes(category) ||
                     parseInt(quantity) === 0 ||
@@ -176,7 +203,7 @@
                     maximumFractionDigits: 0,
                 };
 
-                let valueEach = extractNumericValue(itemElement.querySelector('span.tt-item-price span') ? itemElement.querySelector('span.tt-item-price span').textContent : '0');
+                let valueEach = getMarketValue(itemID);
                 valueEach = valueEach.toLocaleString('en-US', currencyOptions);
                 const itemRow = popupWindow.document.createElement('tr');
                 itemRow.style.border = '1px solid #000';
