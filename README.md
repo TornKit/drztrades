@@ -1,4 +1,4 @@
-This script requires Tampermonkey or another user script manager. The output looks best in horizontal orientation on mobile.
+This script requires Tampermonkey or another user script manager. When on mobile, the output looks best in horizontal/landscape orientation.
 
 The Wellness Emporium Traders (WET) Calculator adds a button to your Items page which, when clicked, gathers the items listed (obeying any filters on the list) and displays in a new window a table with the gathered items listed. The list contains adjustable quantity buttons, the market price for each item, and calculations to total each item together and multiply the result by 98%, displaying to the user the total Zoraida will offer for the items listed in their quantities shown.
 
