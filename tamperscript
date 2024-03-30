@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // SET YOUR API KEY HERE //
-const apiKey = '5smO9WoGIHNKP3qF';
+const apiKey = 'xxx';
 
 (function () {
 'use strict';
