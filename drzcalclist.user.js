@@ -4,8 +4,8 @@
 // @version 1.2
 // @description Opens the best trading interface ever
 // @match https://www.torn.com/item.php*
-// @downloadURL https://github.com/TornKit/drztrades/tree/main/tamperscript
-// @updateURL https://github.com/TornKit/drztrades/tree/main/tamperscript
+// @downloadURL https://raw.githubusercontent.com/TornKit/drztrades/main/drzcalclist.user.js
+// @updateURL https://raw.githubusercontent.com/TornKit/drztrades/main/drzcalclist.user.js
 // @grant none
 // ==/UserScript==
 
