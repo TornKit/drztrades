@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Dr. Z's Trade Receipts
+// @name Dr. Z's Pretty Receipts
 // @namespace http://tampermonkey.net/
 // @version 1.0
 // @description Creates receipts in HTML source
