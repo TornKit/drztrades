@@ -26,7 +26,6 @@ var ad2Url; //=`http://profileimages.torn.com/86756ceb-e2e1-4860-91e5-98801c93f5
 var ad2Href; //=`https://www.torn.com/forums.php#/p=threads&f=10&t=16384597&b=0&a=0`;
 
 const suppMsg = `Support my partners and tell them Zoraida sent you!`;
-const apiKey = `baL5bUmOPNmB4nYd`;
 const apiUrl = `https://api.torn.com/torn/?selections=items&key=${apiKey}`;
 const itemValuePairs = [];
 
