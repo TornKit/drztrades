@@ -67,7 +67,7 @@ const totalValueCell = popupWindow.document.querySelector('.summary-total-value'
 totalValueCell.textContent = totalValue.toLocaleString('en-US', currencyOptions);
 
 const drzPaysCell = popupWindow.document.querySelector('.drz-pays-cell');
-drzPaysCell.textContent = Math.ceil(0.98 * extractNumericValue(totalValueCell.textContent)).toLocaleString('en-US', currencyOptions);
+drzPaysCell.textContent = Math.ceil(0.92 * extractNumericValue(totalValueCell.textContent)).toLocaleString('en-US', currencyOptions);
 }
 
 // Create a button element for "Trade w/ Dr. Z"
@@ -313,7 +313,7 @@ summaryRow.innerHTML = `
 const drzPaysRow = popupWindow.document.createElement('tr');
 drzPaysRow.style.border = '1px solid #000';
 drzPaysRow.innerHTML = `
-<td colspan="3" style="border: 2px solid #000; text-align: right; font-weight: bold;">Dr. Z pays 98%:</td>
+<td colspan="3" style="border: 2px solid #000; text-align: right; font-weight: bold;">Dr. Z pays 92%:</td>
 <td class="drz-pays-cell" style="border: 2px solid #000; text-align: right;">0</td>
 `;
 
