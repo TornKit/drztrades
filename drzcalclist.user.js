@@ -67,7 +67,7 @@ const totalValueCell = popupWindow.document.querySelector('.summary-total-value'
 totalValueCell.textContent = totalValue.toLocaleString('en-US', currencyOptions);
 
 const drzPaysCell = popupWindow.document.querySelector('.drz-pays-cell');
-drzPaysCell.textContent = Math.ceil(0.95 * extractNumericValue(totalValueCell.textContent)).toLocaleString('en-US', currencyOptions);
+drzPaysCell.textContent = Math.ceil(0.93 * extractNumericValue(totalValueCell.textContent)).toLocaleString('en-US', currencyOptions);
 }
 
 // Create a button element for "Trade w/ Dr. Z"
@@ -211,11 +211,11 @@ const datasort = itemElement.getAttribute('data-sort');
 const quantity = itemElement.getAttribute('data-qty');
 const itemID = itemElement.getAttribute('data-item');
 
-if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive', 'Enhancer', 'Special', 'Other', 'Clothing', 'Electronic'].includes(category) ||
+if (['Book', 'Primary', 'Secondary', 'Melee', 'Defensive', 'Electronic'].includes(category) ||
 parseInt(quantity) === 0 ||
 isNaN(parseInt(quantity)) ||
 datasort.match(/^Halloween Basket.*$/) ||
-datasort.match(/^Love Juice/)) {
+{
 return; // Skip items with undesired categories
 }
 
@@ -313,7 +313,7 @@ summaryRow.innerHTML = `
 const drzPaysRow = popupWindow.document.createElement('tr');
 drzPaysRow.style.border = '1px solid #000';
 drzPaysRow.innerHTML = `
-<td colspan="3" style="border: 2px solid #000; text-align: right; font-weight: bold;">Dr. Z pays 95%:</td>
+<td colspan="3" style="border: 2px solid #000; text-align: right; font-weight: bold;">Dr. Z pays 93%:</td>
 <td class="drz-pays-cell" style="border: 2px solid #000; text-align: right;">0</td>
 `;
 
