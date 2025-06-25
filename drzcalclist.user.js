@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Zagan's Black Market Button
 // @namespace http://tampermonkey.net/
-// @version Custom
+// @version 2.0.1
 // @description Launches a themed trading interface for Torn
 // @match https://www.torn.com/item.php*
 // @downloadURL https://raw.githubusercontent.com/TornKit/drztrades/main/drzcalclist.user.js
