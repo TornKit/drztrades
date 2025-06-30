@@ -20,14 +20,12 @@ List empty or not displaying all your items? Ensure the following:
   - Clothing
   - Electronic
  
-Direct queries to Zoraida (2871443).
+Direct queries to Zagan (2871443).
 
 Planned enhancements
 - Parameterized buying
-  configuration (basically
-  opening it up to other traders
-  more than it already is by making
-  some behaviors easily adjustable)
+  configurations
+- API Key input/storage in the UI
 
 Implemented enchancements
 - Quantity boxes accept user input
