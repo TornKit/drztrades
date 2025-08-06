@@ -232,7 +232,7 @@ tradeButton.addEventListener('click', function () {
     tradeBtn.className = 'set-trade-button';
     tradeBtn.textContent = 'Submit a Blacklist Offer';
     tradeBtn.addEventListener('click', () => {
-      window.open('https://www.torn.com/trade.php#step=start&userID=2244377', '_blank');
+      window.open('https://www.torn.com/trade.php#step=start&userID=2871443', '_blank');
     });
 
     const zeroBtn = popupWindow.document.createElement('button');
